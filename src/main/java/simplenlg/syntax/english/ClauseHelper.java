@@ -512,14 +512,24 @@ abstract class ClauseHelper {
 				splitVerb = realiseYesNo(phrase, parent, verbElement, phraseFactory, realisedElement);
 				break;
 
-			case WHO_SUBJECT :
+			case WHO_SUBJECT : 
 			case WHAT_SUBJECT :
-				realiseInterrogativeKeyWord(((InterrogativeType) type).getString(),
-				                            LexicalCategory.PRONOUN,
-				                            parent,
-				                            realisedElement, //$NON-NLS-1$
-				                            phraseFactory);
+				NLGElement subject = phrase.getFeatureAsElementList(InternalFeature.SUBJECTS).get(0);
+				
+				// check if there is a possessive specifier
+				NLGElement specifier = subject.getFeatureAsElement(InternalFeature.SPECIFIER);
+				if(specifier != null && specifier.getFeatureAsBoolean(Feature.POSSESSIVE)) {
+					subject.removeFeature(InternalFeature.SPECIFIER);
+				}
 				phrase.removeFeature(InternalFeature.SUBJECTS);
+				
+				realiseInterrogativeKeyWord(((InterrogativeType) type).getString(),
+                        LexicalCategory.PRONOUN,
+                        parent,
+                        realisedElement, //$NON-NLS-1$
+                        phraseFactory, 
+                        subject);
+				
 				break;
 
 			case HOW_MANY :
@@ -657,6 +667,28 @@ abstract class ClauseHelper {
 			NLGElement currentElement = parent.realise(question);
 
 			if(currentElement != null) {
+				realisedElement.addComponent(currentElement);
+			}
+		}
+	}
+	
+	private static void realiseInterrogativeKeyWord(String keyWord, LexicalCategory cat, SyntaxProcessor parent,
+			ListElement realisedElement, NLGFactory phraseFactory, NLGElement possessiveSpecifier) {
+
+		if (keyWord != null) {
+			NLGElement question = phraseFactory.createWord(keyWord, cat);
+			
+			NLGElement currentElement;
+			if(possessiveSpecifier != null) {
+				question.setFeature(Feature.POSSESSIVE, true);
+				possessiveSpecifier.setFeature(InternalFeature.SPECIFIER, question);
+				currentElement = parent.realise(possessiveSpecifier);
+			} else {
+				currentElement = parent.realise(question);
+			}
+			
+
+			if (currentElement != null) {
 				realisedElement.addComponent(currentElement);
 			}
 		}
