@@ -49,7 +49,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     -->
     <!-- Selective Libraries included on the classpath -->
     <path id="classpath">
-        <pathelement path="${lib.dir}/junit-4.4.jar" />
+        <!--pathelement path="${lib.dir}/junit-4.4.jar" /-->
         <pathelement path="${lib.dir}/lexAccess2011dist.jar" />
         <pathelement path="${lib.dir}/lexCheck2006api.jar" />
         <pathelement path="${lib.dir}/lvg2011api.jar" />
@@ -107,6 +107,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
             <fileset dir="${src.dir}" includes="**/*.java" />
             <zipgroupfileset dir="${lib.dir}" includes="**/*.jar">
 	        <exclude name="lexAccess2013dis.jar"/>
+		<exclude name="junit-4.4.jar"/>
             </zipgroupfileset>
         </jar>
     </target>
