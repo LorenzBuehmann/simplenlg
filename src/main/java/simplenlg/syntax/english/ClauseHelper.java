@@ -36,6 +36,7 @@ import simplenlg.framework.NLGElement;
 import simplenlg.framework.NLGFactory;
 import simplenlg.framework.PhraseCategory;
 import simplenlg.framework.PhraseElement;
+import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.phrasespec.VPPhraseSpec;
 
@@ -676,17 +677,25 @@ abstract class ClauseHelper {
 			ListElement realisedElement, NLGFactory phraseFactory, NLGElement possessiveSpecifier) {
 
 		if (keyWord != null) {
+			
 			NLGElement question = phraseFactory.createWord(keyWord, cat);
 			
 			NLGElement currentElement;
 			if(possessiveSpecifier != null) {
-				question.setFeature(Feature.POSSESSIVE, true);
-				possessiveSpecifier.setFeature(InternalFeature.SPECIFIER, question);
+				//sledge hammer method because 'who' is not inflected yet
+				if(keyWord.equals("who")) {
+					keyWord = "whose";
+					question = phraseFactory.createWord(keyWord, cat);
+				}
+				
+				NPPhraseSpec nPhrase = phraseFactory.createNounPhrase(question);
+//				nPhrase.setFeature(Feature.POSSESSIVE, true);
+//				question.setFeature(Feature.POSSESSIVE, true);
+				possessiveSpecifier.setFeature(InternalFeature.SPECIFIER, nPhrase);
 				currentElement = parent.realise(possessiveSpecifier);
 			} else {
 				currentElement = parent.realise(question);
 			}
-			
 
 			if (currentElement != null) {
 				realisedElement.addComponent(currentElement);

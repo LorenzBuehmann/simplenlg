@@ -68,6 +68,13 @@ public enum InterrogativeType {
 	 * <em>Where did John go?</em>
 	 */
 	WHERE,
+	
+	/**
+	 * This type of interrogative concerns the object of a verb that is to do
+	 * with time. For example, <em>John was born in 1980</em> becomes
+	 * <em>When was John born?</em>
+	 */
+	WHEN,
 
 	/**
 	 * This type of interrogative is a question pertaining to the indirect
@@ -161,6 +168,9 @@ public enum InterrogativeType {
 			break;
 		case WHERE:
 			s = "where";
+			break;
+		case WHEN:
+			s = "when";
 			break;
 		case WHO_INDIRECT_OBJECT:
 		case WHO_OBJECT:
