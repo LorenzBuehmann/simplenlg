@@ -67,14 +67,14 @@ public enum InterrogativeType {
 	 * with location. For example, <em>John went to the beach</em> becomes
 	 * <em>Where did John go?</em>
 	 */
-	WHERE,
+	WHERE_OBJECT,
 	
 	/**
 	 * This type of interrogative concerns the object of a verb that is to do
 	 * with time. For example, <em>John was born in 1980</em> becomes
 	 * <em>When was John born?</em>
 	 */
-	WHEN,
+	WHEN_OBJECT,
 
 	/**
 	 * This type of interrogative is a question pertaining to the indirect
@@ -130,7 +130,8 @@ public enum InterrogativeType {
 	 *         <code>false</code> otherwise.
 	 */
 	public static boolean isObject(Object type) {
-		return WHO_OBJECT.equals(type) || WHAT_OBJECT.equals(type);
+		return WHO_OBJECT.equals(type) || WHAT_OBJECT.equals(type) || WHERE_OBJECT.equals(type)
+				|| WHEN_OBJECT.equals(type);
 	}
 
 	/**
@@ -166,10 +167,10 @@ public enum InterrogativeType {
 		case WHAT_SUBJECT:
 			s = "what";
 			break;
-		case WHERE:
+		case WHERE_OBJECT:
 			s = "where";
 			break;
-		case WHEN:
+		case WHEN_OBJECT:
 			s = "when";
 			break;
 		case WHO_INDIRECT_OBJECT:
