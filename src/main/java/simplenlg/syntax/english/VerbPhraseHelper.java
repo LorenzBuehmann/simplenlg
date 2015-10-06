@@ -398,9 +398,11 @@ abstract class VerbPhraseHelper {
 			frontVG.setFeature(Feature.NUMBER, numToUse);
 			
 			//don't push the front VG if it's a negated interrogative WH object question
-			if (!(phrase.getFeatureAsBoolean(Feature.NEGATED).booleanValue() && (InterrogativeType.WHO_OBJECT
-					.equals(interrogType) || InterrogativeType.WHAT_OBJECT
-					.equals(interrogType)))) {
+			if (!(phrase.getFeatureAsBoolean(Feature.NEGATED).booleanValue() && (
+					InterrogativeType.WHO_OBJECT.equals(interrogType) ||
+					InterrogativeType.WHAT_OBJECT.equals(interrogType) ||
+					InterrogativeType.WHERE_OBJECT.equals(interrogType) ||
+					InterrogativeType.WHEN_OBJECT.equals(interrogType)))) {
 				vgComponents.push(frontVG);
 			}
 		}

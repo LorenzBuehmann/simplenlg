@@ -87,7 +87,7 @@ abstract class ClauseHelper {
 				interrogObj = (InterrogativeType.WHAT_OBJECT.equals(inter)
 				               || InterrogativeType.WHO_OBJECT.equals(inter)
 				               || InterrogativeType.HOW_PREDICATE.equals(inter) || InterrogativeType.HOW.equals(inter)
-				               || InterrogativeType.WHY.equals(inter) || InterrogativeType.WHERE.equals(inter));
+				               || InterrogativeType.WHY.equals(inter) || InterrogativeType.WHERE_OBJECT.equals(inter));
 				splitVerb = realiseInterrogative(phrase, parent, realisedElement, phraseFactory, verbElement);
 			} else {
 				PhraseHelper.realiseList(parent,
@@ -542,7 +542,7 @@ abstract class ClauseHelper {
 
 			case HOW :
 			case WHY :
-			case WHERE :
+			case WHERE_OBJECT :
 			case WHO_OBJECT :
 			case WHO_INDIRECT_OBJECT :
 			case WHAT_OBJECT :
@@ -685,11 +685,12 @@ abstract class ClauseHelper {
 				//sledge hammer method because 'who' is not inflected yet
 				if(keyWord.equals("who")) {
 					keyWord = "whose";
-					question = phraseFactory.createWord(keyWord, cat);
+					question = phraseFactory.createInflectedWord(phraseFactory.createWord(keyWord, cat), cat);
 				}
+				question.setFeature(Feature.POSSESSIVE, true);
 				
 				NPPhraseSpec nPhrase = phraseFactory.createNounPhrase(question);
-//				nPhrase.setFeature(Feature.POSSESSIVE, true);
+				nPhrase.setFeature(Feature.POSSESSIVE, true);
 //				question.setFeature(Feature.POSSESSIVE, true);
 				possessiveSpecifier.setFeature(InternalFeature.SPECIFIER, nPhrase);
 				currentElement = parent.realise(possessiveSpecifier);

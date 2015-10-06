@@ -303,7 +303,7 @@ public class External1Test {
 		Assert.assertEquals("Does Mary chase George?", realiser.realiseSentence(p));
 
 		p = this.phraseFactory.createClause("Mary", "chase", "George");
-		p.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE);
+		p.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE_OBJECT);
 		Assert.assertEquals("Where does Mary chase George?", realiser.realiseSentence(p));
 
 		p = this.phraseFactory.createClause("Mary", "chase", "George");

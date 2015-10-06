@@ -85,7 +85,7 @@ public abstract class MorphologyRules {
 					{ "ours", "yours", "theirs", "theirs", "theirs" },
 					{ "our", "your", "their", "their", "their" } } };
 
-	private static final String[] WH_PRONOUNS = { "who", "what", "which",
+	private static final String[] WH_PRONOUNS = { "who", "what", "which", "whose", "when",
 			"where", "why", "how", "how many" };
 
 	/**

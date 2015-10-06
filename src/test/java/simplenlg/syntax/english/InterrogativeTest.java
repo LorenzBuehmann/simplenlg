@@ -683,7 +683,7 @@ public class InterrogativeTest extends SimpleNLG4Test {
 		Assert.assertEquals("why is Mary beautiful", this.realiser.realise(p2)
 				.getRealisation());
 
-		p2.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE);
+		p2.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE_OBJECT);
 		Assert.assertEquals("where is Mary beautiful", this.realiser.realise(p2)
 				.getRealisation());
 		
@@ -722,7 +722,7 @@ public class InterrogativeTest extends SimpleNLG4Test {
 		Assert.assertEquals("why will Mary be beautiful", this.realiser
 				.realise(p2).getRealisation());
 
-		p2.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE);
+		p2.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE_OBJECT);
 		Assert.assertEquals("where will Mary be beautiful", this.realiser
 				.realise(p2).getRealisation());
 		
@@ -761,7 +761,7 @@ public class InterrogativeTest extends SimpleNLG4Test {
 		Assert.assertEquals("why was Mary beautiful", this.realiser.realise(p2)
 				.getRealisation());
 		
-		p2.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE);
+		p2.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE_OBJECT);
 		Assert.assertEquals("where was Mary beautiful", this.realiser.realise(p2)
 				.getRealisation());
 
@@ -777,7 +777,7 @@ public class InterrogativeTest extends SimpleNLG4Test {
 	public void testSimpleBeWHQuestions() {
 		SPhraseSpec p = this.phraseFactory.createClause("I", "be");
 		
-		p.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE);		
+		p.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHERE_OBJECT);		
 		Assert.assertEquals("Where am I?", realiser.realiseSentence(p));
 		
 		p.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHY);		
