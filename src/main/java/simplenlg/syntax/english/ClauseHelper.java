@@ -524,12 +524,21 @@ abstract class ClauseHelper {
 				}
 				phrase.removeFeature(InternalFeature.SUBJECTS);
 				
-				realiseInterrogativeKeyWord(((InterrogativeType) type).getString(),
-                        LexicalCategory.PRONOUN,
-                        parent,
-                        realisedElement, //$NON-NLS-1$
-                        phraseFactory, 
-                        subject);
+				if(specifier != null) {
+					realiseInterrogativeKeyWord(((InterrogativeType) type).getString(),
+	                        LexicalCategory.PRONOUN,
+	                        parent,
+	                        realisedElement, //$NON-NLS-1$
+	                        phraseFactory, 
+	                        subject);
+				} else {
+					realiseInterrogativeKeyWord(((InterrogativeType) type).getString(),
+	                        LexicalCategory.PRONOUN,
+	                        parent,
+	                        realisedElement, //$NON-NLS-1$
+	                        phraseFactory);
+				}
+				
 				
 				break;
 
